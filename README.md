@@ -1108,103 +1108,194 @@ This project exposes the following GraphQL APIs.
 **Queries**
 
 - `author(id)` – Fetch a single Author by ID. Returns only the requested fields.
+  <br /><br />
+  Example 1 - Return only first name.
+  <img width="3840" height="1162" alt="image" src="https://github.com/user-attachments/assets/c7015b0d-6e02-405b-9c90-0f878ba4c793" />
+  <br />
+  Example 2 - Return full name.
+  <img width="3840" height="944" alt="image" src="https://github.com/user-attachments/assets/1c262409-0193-4a70-bc0c-6aec6fdeefd1" />
+  <br />
+  Example 3 - Return complete author details.
+  <img width="3840" height="980" alt="image" src="https://github.com/user-attachments/assets/26f15101-89a9-4b67-92b4-eb0febca4eb5" />
+
 - `authors()` – Fetch all Authors. Returns only the requested fields.
+  <br /><br />
+  Example 1 - Return author names.
+  <img width="3840" height="2072" alt="image" src="https://github.com/user-attachments/assets/f070bf7a-f8c1-4238-b5d4-0f4b5aaf8bac" />
+  <br />
+  Example 2 - Return complete author details.
+  <img width="3840" height="2068" alt="image" src="https://github.com/user-attachments/assets/836f4b9b-be9e-4ab4-86e4-4d2d9a9e9d40" />
 
 **Mutations**
 
 - `createAuthor` – Create a new Author.
+  <br /><br />
+  Example 1 - Create and return complete author details.
+  <img width="3840" height="1078" alt="image" src="https://github.com/user-attachments/assets/d949806f-8e11-421f-8085-81c78d6dd1ee" />
+  <br />
+  Example 2 - Create and return only generated ID.
+  <img width="3840" height="1034" alt="image" src="https://github.com/user-attachments/assets/716b792d-d760-4e18-ab27-fd837c6998d4" />
+
 - `updateAuthor` – Update an existing Author.
+  <br /><br />
+  Example 1 - Update and return updated author's name.
+  <img width="3840" height="1114" alt="image" src="https://github.com/user-attachments/assets/f0acc382-5cc7-4feb-93fc-09f0106d9ce0" />
+
 - `deleteAuthor` – Delete an Author by ID.
+  <br /><br />
+  Example 1 - Delete an author by its ID (An author cannot be deleted if any book is associated with that author)
+  <img width="3840" height="1394" alt="image" src="https://github.com/user-attachments/assets/096cef69-e580-433b-a660-174a37a5a47e" />
+  <br />
+  Example 2 - Delete an author by its ID 
+  <img width="3840" height="1046" alt="image" src="https://github.com/user-attachments/assets/2e03b5d1-fac3-4d95-863f-d1a88617e1ed" />
 
 ### Book APIs
 
 **Queries**
 
 - `book(id)` – Fetch a single Book by ID. Returns only the requested fields.
+  <br /><br />
+  Example 1 - Return only the title.
+  <img width="3840" height="1066" alt="image" src="https://github.com/user-attachments/assets/b863eafa-0489-4f88-ae7e-57aa76e96ff9" />
+  <br />
+  Example 2 - Return title and ISBN.
+  <img width="3840" height="952" alt="image" src="https://github.com/user-attachments/assets/9b8bdf30-80cc-4fd9-804e-1452de718c97" />
+  <br />
+  Example 3 - Return complete book details.
+  <img width="3840" height="1362" alt="image" src="https://github.com/user-attachments/assets/51bef604-16f1-4a0b-a65a-c8a1224f6db4" />
+
 - `books(...)` – Fetch Books with filtering, pagination, and sorting.
+  <br /><br />
+  Example 1 - Fetch first page using default sorting.
+  <img width="3840" height="2078" alt="image" src="https://github.com/user-attachments/assets/1a718c57-1575-4c85-9b9c-4378f9e8dbf0" />
+  <br />
+  Example 2 - Filter by title.
+  <img width="3840" height="1240" alt="image" src="https://github.com/user-attachments/assets/c591cab4-07cf-4b6a-aafe-a253de7f8589" />
+  <br />
+  👉 Partial search also allowed.
+  <img width="3840" height="1276" alt="image" src="https://github.com/user-attachments/assets/c5c51d10-04cc-47be-bdaf-9af99e6e3130" />
+  <br />
+  Example 3 - Filter by author and category.
+  <img width="3840" height="1288" alt="image" src="https://github.com/user-attachments/assets/5f042103-97c2-4537-84ce-a187c2e3cc57" />
+  <br />
+  Example 4 - Pagination and sorting.
+  <img width="3840" height="2060" alt="image" src="https://github.com/user-attachments/assets/be3ae67f-1b38-43fc-a787-cb83811f1015" />
 
 **Mutations**
 
 - `createBook` – Create a new Book.
+  <br /><br />
+  Example 1 - Create and return complete book details.
+  <img width="3840" height="2076" alt="image" src="https://github.com/user-attachments/assets/d68638d7-4d8f-46e1-b3d1-aeb5c169b51f" />
+
 - `updateBook` – Update an existing Book.
+  <br /><br />
+  Example 1 - Update book title and author and then return only updated title.
+  <img width="3840" height="1230" alt="image" src="https://github.com/user-attachments/assets/7e14eee3-0034-4a6f-b63e-49f9da57033f" />
+
 - `deleteBook` – Delete a Book by ID.
-
-Example: Pagination, Filtering and Sorting
-
-```
-query {
-  books(
-    page: 0
-    size: 5
-    sortBy: "title"
-    sortDirection: ASC
-    title: "Spring"
-    available: true
-  ) {
-    content {
-      id
-      title
-      price
-      available
-    }
-    totalElements
-    totalPages
-    currentPage
-    pageSize
-  }
-}
-```
+  <br /><br />
+  Example 1 - Delete a book by its ID.
+  <img width="3840" height="804" alt="image" src="https://github.com/user-attachments/assets/42d58abd-285b-4469-9cc7-a7ccd326ee8b" />
 
 ### Category APIs
 
 **Queries**
 
 - `category(id)` – Fetch a single Category by ID.
+  <br /><br />
+  <img width="3840" height="902" alt="image" src="https://github.com/user-attachments/assets/dea66670-41b6-4274-9b82-23c0b8ec5fac" />
+
 - `categories()` – Fetch all Categories.
+  <br /><br />
+  <img width="3840" height="1710" alt="image" src="https://github.com/user-attachments/assets/082df2ce-6a1f-4b4a-be06-addcec28d727" />
 
 **Mutations**
 
 - `createCategory` – Create a new Category.
+  <br /><br />
+  <img width="3840" height="1012" alt="image" src="https://github.com/user-attachments/assets/38fa6a49-aa88-4649-9a9f-5401da818053" />
+
 - `updateCategory` – Update an existing Category.
+  <br /><br />
+  <img width="3840" height="1070" alt="image" src="https://github.com/user-attachments/assets/1f367c91-bebe-4e0d-8465-5f8d8934db61" />
+
 - `deleteCategory` – Delete a Category by ID.
+  <br /><br />
+  <img width="3840" height="942" alt="image" src="https://github.com/user-attachments/assets/a4a449b0-96c4-421d-b9b1-fcaa8f86847b" />
 
 ### Publisher APIs
 
 **Queries**
 
 - `publisher(id)` – Fetch a single Publisher by ID.
+  <br /><br />
+  <img width="3840" height="852" alt="image" src="https://github.com/user-attachments/assets/2eb5026b-4062-4370-813e-bd35e8a6b6fb" />
+
 - `publishers()` – Fetch all Publishers.
+  <img width="3840" height="2076" alt="image" src="https://github.com/user-attachments/assets/a4d0252b-98c9-4f51-bd98-c4ff36b24e0a" />
 
 **Mutations**
 
 - `createPublisher` – Create a new Publisher.
+  <br /><br />
+  <img width="3840" height="886" alt="image" src="https://github.com/user-attachments/assets/bea0e932-e51d-4d2a-9565-77f85a4ae05e" />
+
 - `updatePublisher` – Update an existing Publisher.
+  <br /><br />
+  <img width="3840" height="1008" alt="image" src="https://github.com/user-attachments/assets/2b63bfdf-7c0a-4523-894c-badc86d43586" />
+
 - `deletePublisher` – Delete a Publisher by ID.
+  <br /><br />
+  <img width="3840" height="848" alt="image" src="https://github.com/user-attachments/assets/dcf7acbb-fc90-4c20-aa2e-6dfe9a65d472" />
 
 ### Member APIs
 
 **Queries**
 
 - `member(id)` – Fetch a single Member by ID.
+  <br /><br />
+  <img width="3840" height="858" alt="image" src="https://github.com/user-attachments/assets/38247822-582c-4712-b730-3cc9985498ee" />
+
 - `members()` – Fetch all Members.
+  <br /><br />
+  <img width="3840" height="2074" alt="image" src="https://github.com/user-attachments/assets/7df9bdfa-1ecd-473f-9122-517236e3c43f" />
 
 **Mutations**
 
 - `createMember` – Create a new Member.
+  <br /><br />
+  <img width="3840" height="1088" alt="image" src="https://github.com/user-attachments/assets/013903c8-6421-4ae6-9d60-f193079b0b05" />
+
 - `updateMember` – Update an existing Member.
+  <br /><br />
+  <img width="3840" height="1016" alt="image" src="https://github.com/user-attachments/assets/8cac3640-7f06-4ef5-aaac-0641ab67ed0f" />
+
 - `deleteMember` – Delete a Member by ID.
+  <br /><br />
+  <img width="3840" height="730" alt="image" src="https://github.com/user-attachments/assets/52a34884-9a5e-41ee-9bb1-6e5e9720d8c7" />
 
 ### Borrow Record APIs
 
 **Queries**
 
 - `borrowRecord(id)` – Fetch a single Borrow Record by ID.
+  <br /><br />
+  <img width="3840" height="1370" alt="image" src="https://github.com/user-attachments/assets/a1c414e2-17a3-4c3c-bc84-9782390b4fae" />
+
 - `borrowRecords()` – Fetch all Borrow Records.
+  <br /><br />
+  <img width="3840" height="2074" alt="image" src="https://github.com/user-attachments/assets/255fc066-45d2-4e47-b50d-a4600594359c" />
 
 **Mutations**
 
 - `borrowBook(bookId, memberId)` – Borrow a Book.
+  <br /><br />
+  <img width="3840" height="1346" alt="image" src="https://github.com/user-attachments/assets/f9b36f1b-a7b4-45f1-ad66-ebe8def82e88" />
+
 - `returnBook(id)` – Return a borrowed Book.
+  <br /><br />
+  <img width="3840" height="1134" alt="image" src="https://github.com/user-attachments/assets/fb2c42fe-50fb-4962-ab7b-b826c8622274" />
 
 ### GraphQL Field Resolvers
 
@@ -1236,6 +1327,7 @@ query {
   }
 }
 ```
+<img width="3840" height="2076" alt="image" src="https://github.com/user-attachments/assets/05370cc5-c668-44fa-814c-f30a8538e11c" />
 
 ### BorrowRecordFieldResolver
 
@@ -1261,6 +1353,7 @@ query {
   }
 }
 ```
+<img width="3840" height="2076" alt="image" src="https://github.com/user-attachments/assets/0df8a060-fd71-4fac-8898-95c7ccbef184" />
 
 ---
 # Project Highlights
