@@ -1,0 +1,168 @@
+# =============================================================================
+# Book GraphQL Schema
+# =============================================================================
+#
+# This schema defines the GraphQL API, including queries, mutations,
+# object types, input objects, and pagination for managing books in the
+# Library Management System.
+#
+# A GraphQL schema acts as the contract between the client and the server.
+# It defines:
+#
+# • Queries       - Read or fetch data.
+# • Mutations     - Create, update, and delete data.
+# • Object Types  - Objects returned to the client.
+# • Input Objects - Objects accepted from the client.
+# • Enums         - Fixed set of allowed values.
+#
+# Queries
+# • Fetch a single book by ID.
+# • Fetch books with filtering, pagination, and sorting.
+#
+# Mutations
+# • Create a new book.
+# • Update an existing book.
+# • Delete an existing book.
+#
+# GraphQL Symbols
+# • !  -> Indicates a mandatory (non-null) field or argument.
+# • [] -> Indicates a list (collection) of objects.
+#
+# Examples
+# • ID!          -> Mandatory ID
+# • String!      -> Mandatory String
+# • String       -> Optional String
+# • [Book!]!     -> Mandatory list containing non-null Book objects.
+# =============================================================================
+
+extend type Query {
+
+    # Fetch a single book by its unique ID.
+    book(id: ID!): Book
+
+    # Fetch books with optional filtering, pagination, and sorting.
+    books(
+        title: String
+        authorId: ID
+        categoryId: ID
+        publisherId: ID
+        page: Int = 0
+        size: Int = 10
+        sortBy: String = "title"
+        direction: SortDirection = ASC
+    ): BookPage!
+}
+
+extend type Mutation {
+
+    # Create a new book.
+    createBook(input: BookInput!): Book
+
+    # Update an existing book.
+    updateBook(id: ID!, input: BookInput!): Book
+
+    # Delete an existing book by its unique ID.
+    # Returns true if the book is deleted successfully.
+    deleteBook(id: ID!): Boolean
+}
+
+# Represents a book in the Library Management System.
+#
+# A book is associated with an Author, Category, and Publisher.
+type Book {
+
+    # Unique identifier.
+    id: ID!
+
+    # Book title.
+    title: String!
+
+    # International Standard Book Number.
+    isbn: String!
+
+    # Year the book was published.
+    publicationYear: Int
+
+    # Book price.
+    price: Float
+
+    # Indicates whether the book is currently available.
+    available: Boolean!
+
+    # Associated author.
+    author: Author
+
+    # Associated category.
+    category: Category
+
+    # Associated publisher.
+    publisher: Publisher
+}
+
+# Input object used to create or update a book.
+#
+# Unlike the Book type, this object contains only the fields
+# that clients are allowed to provide.
+input BookInput {
+
+    # Book title.
+    title: String!
+
+    # International Standard Book Number.
+    isbn: String!
+
+    # Year the book was published.
+    publicationYear: Int
+
+    # Book price.
+    price: Float
+
+    # Indicates whether the book is available.
+    available: Boolean
+
+    # Identifier of the associated author.
+    authorId: ID!
+
+    # Identifier of the associated category.
+    categoryId: ID!
+
+    # Identifier of the associated publisher.
+    publisherId: ID!
+}
+
+# Represents a paginated response containing books.
+#
+# Returned when querying books with pagination.
+type BookPage {
+
+    # List of books for the current page.
+    content: [Book!]!
+
+    # Total number of matching books.
+    totalElements: Int!
+
+    # Total number of available pages.
+    totalPages: Int!
+
+    # Current page number (zero-based).
+    pageNumber: Int!
+
+    # Number of records per page.
+    pageSize: Int!
+
+    # Indicates whether this is the first page.
+    first: Boolean!
+
+    # Indicates whether this is the last page.
+    last: Boolean!
+}
+
+# Specifies the sorting direction for query results.
+enum SortDirection {
+
+    # Sort in ascending order.
+    ASC
+
+    # Sort in descending order.
+    DESC
+}

@@ -1,0 +1,33 @@
+# =============================================================================
+# Root GraphQL Schema
+# =============================================================================
+#
+# This file defines the root Query and Mutation types for the Library
+# Management System.
+#
+# In GraphQL, all read operations start from the Query type, while all
+# data modification operations start from the Mutation type.
+#
+# Feature-specific schema files (author.graphqls, book.graphqls,
+# category.graphqls, member.graphqls, publisher.graphqls, and
+# borrow-record.graphqls) extend these root types using the
+# "extend type" keyword.
+#
+# Example
+#
+# extend type Query {
+#     authors: [Author!]!
+# }
+#
+# extend type Mutation {
+#     createAuthor(input: AuthorInput!): Author
+# }
+#
+# This approach keeps the schema modular, organized, and easy to maintain.
+# =============================================================================
+
+# Root type for all GraphQL read operations.
+type Query
+
+# Root type for all GraphQL write operations.
+type Mutation

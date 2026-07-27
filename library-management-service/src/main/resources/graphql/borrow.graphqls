@@ -1,0 +1,69 @@
+# =============================================================================
+# Borrow Record GraphQL Schema
+# =============================================================================
+#
+# This schema defines the GraphQL API for managing book borrowing and
+# returning operations in the Library Management System.
+#
+# A Borrow Record represents a transaction where a library member borrows
+# a book and later returns it.
+#
+# GraphQL Schema
+#
+# • Queries       - Retrieve borrow records.
+# • Mutations     - Borrow and return books.
+# • Object Types  - BorrowRecord.
+# • Enums         - BorrowStatus.
+#
+# GraphQL Symbols
+#
+# • !  -> Required field or argument.
+# • [] -> List of objects.
+# =============================================================================
+
+extend type Query {
+
+    # Retrieve a borrow record by its unique identifier.
+    borrowRecord(id: ID!): BorrowRecord
+
+    # Retrieve all borrow records.
+    borrowRecords: [BorrowRecord!]!
+}
+
+extend type Mutation {
+
+    # Borrow a book for a member.
+    borrowBook(
+        bookId: ID!,
+        memberId: ID!
+    ): BorrowRecord!
+
+    # Return a previously borrowed book.
+    returnBook(id: ID!): BorrowRecord!
+}
+
+# Represents a book borrowing transaction.
+type BorrowRecord {
+
+    id: ID!
+
+    borrowDate: String!
+
+    dueDate: String!
+
+    returnDate: String
+
+    status: BorrowStatus!
+
+    book: Book!
+
+    member: Member!
+}
+
+# Represents the current borrowing status.
+enum BorrowStatus {
+
+    BORROWED
+
+    RETURNED
+}

@@ -1,0 +1,89 @@
+# =============================================================================
+# Author GraphQL Schema
+# =============================================================================
+#
+# This schema defines the GraphQL API, including queries, mutations,
+# object types, and input objects for managing authors in the Library
+# Management System.
+#
+# A GraphQL schema acts as the contract between the client and the server.
+# It defines:
+#
+# • Queries       - Read or fetch data.
+# • Mutations     - Create, update, and delete data.
+# • Object Types  - Objects returned to the client.
+# • Input Objects - Objects accepted from the client.
+#
+# Queries
+# • Fetch a single author by ID.
+# • Fetch all authors.
+#
+# Mutations
+# • Create a new author.
+# • Update an existing author.
+# • Delete an existing author.
+#
+# GraphQL Symbols
+# • !  -> Indicates a mandatory (non-null) field or argument.
+# • [] -> Indicates a list (collection) of objects.
+#
+# Examples
+# • ID!          -> Mandatory ID
+# • String!      -> Mandatory String
+# • String       -> Optional String
+# • [Author!]!   -> Mandatory list containing non-null Author objects.
+# =============================================================================
+
+extend type Query {
+
+    # Fetch a single author by its unique ID.
+    author(id: ID!): Author
+
+    # Fetch all authors.
+    authors: [Author!]!
+}
+
+extend type Mutation {
+
+    # Create a new author.
+    createAuthor(input: AuthorInput!): Author
+
+    # Update an existing author.
+    updateAuthor(id: ID!, input: AuthorInput!): Author
+
+    # Delete an existing author by its unique ID.
+    # Returns true if the author is deleted successfully.
+    deleteAuthor(id: ID!): Boolean
+}
+
+# Represents an author in the Library Management System.
+type Author {
+
+    # Unique identifier.
+    id: ID!
+
+    # Author's first name.
+    firstName: String!
+
+    # Author's last name.
+    lastName: String!
+
+    # Author's email address (optional).
+    email: String
+}
+
+# Input object used to create or update an author.
+#
+# Unlike the Author type, this object contains only the fields
+# that clients are allowed to provide.
+input AuthorInput {
+
+    # Author's first name.
+    firstName: String!
+
+    # Author's last name.
+    lastName: String!
+
+    # Author's email address (optional).
+    email: String
+}

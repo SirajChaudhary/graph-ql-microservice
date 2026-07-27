@@ -1,0 +1,83 @@
+# =============================================================================
+# Category GraphQL Schema
+# =============================================================================
+#
+# This schema defines the GraphQL API, including queries, mutations,
+# object types, and input objects for managing book categories in the
+# Library Management System.
+#
+# A GraphQL schema acts as the contract between the client and the server.
+# It defines:
+#
+# • Queries       - Read or fetch data.
+# • Mutations     - Create, update, and delete data.
+# • Object Types  - Objects returned to the client.
+# • Input Objects - Objects accepted from the client.
+#
+# Queries
+# • Fetch a single category by ID.
+# • Fetch all categories.
+#
+# Mutations
+# • Create a new category.
+# • Update an existing category.
+# • Delete an existing category.
+#
+# GraphQL Symbols
+# • !  -> Indicates a mandatory (non-null) field or argument.
+# • [] -> Indicates a list (collection) of objects.
+#
+# Examples
+# • ID!            -> Mandatory ID
+# • String!        -> Mandatory String
+# • String         -> Optional String
+# • [Category!]!   -> Mandatory list containing non-null Category objects.
+# =============================================================================
+
+extend type Query {
+
+    # Fetch a single category by its unique ID.
+    category(id: ID!): Category
+
+    # Fetch all categories.
+    categories: [Category!]!
+}
+
+extend type Mutation {
+
+    # Create a new category.
+    createCategory(input: CategoryInput!): Category
+
+    # Update an existing category.
+    updateCategory(id: ID!, input: CategoryInput!): Category
+
+    # Delete an existing category by its unique ID.
+    # Returns true if the category is deleted successfully.
+    deleteCategory(id: ID!): Boolean
+}
+
+# Represents a book category in the Library Management System.
+type Category {
+
+    # Unique identifier.
+    id: ID!
+
+    # Category name.
+    name: String!
+
+    # Brief description of the category (optional).
+    description: String
+}
+
+# Input object used to create or update a category.
+#
+# Unlike the Category type, this object contains only the fields
+# that clients are allowed to provide.
+input CategoryInput {
+
+    # Category name.
+    name: String!
+
+    # Brief description of the category (optional).
+    description: String
+}

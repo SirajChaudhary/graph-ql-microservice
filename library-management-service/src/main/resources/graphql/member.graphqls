@@ -1,0 +1,95 @@
+# =============================================================================
+# Member GraphQL Schema
+# =============================================================================
+#
+# This schema defines the GraphQL API, including queries, mutations,
+# object types, and input objects for managing library members in the
+# Library Management System.
+#
+# A GraphQL schema acts as the contract between the client and the server.
+# It defines:
+#
+# • Queries       - Read or fetch data.
+# • Mutations     - Create, update, and delete data.
+# • Object Types  - Objects returned to the client.
+# • Input Objects - Objects accepted from the client.
+#
+# Queries
+# • Fetch a single member by ID.
+# • Fetch all members.
+#
+# Mutations
+# • Create a new member.
+# • Update an existing member.
+# • Delete an existing member.
+#
+# GraphQL Symbols
+# • !  -> Indicates a mandatory (non-null) field or argument.
+# • [] -> Indicates a list (collection) of objects.
+#
+# Examples
+# • ID!         -> Mandatory ID
+# • String!     -> Mandatory String
+# • String      -> Optional String
+# • [Member!]!  -> Mandatory list containing non-null Member objects.
+# =============================================================================
+
+extend type Query {
+
+    # Fetch a single member by its unique ID.
+    member(id: ID!): Member
+
+    # Fetch all library members.
+    members: [Member!]!
+}
+
+extend type Mutation {
+
+    # Create a new library member.
+    createMember(input: MemberInput!): Member
+
+    # Update an existing library member.
+    updateMember(id: ID!, input: MemberInput!): Member
+
+    # Delete a library member by its unique ID.
+    # Returns true if the member is deleted successfully.
+    deleteMember(id: ID!): Boolean
+}
+
+# Represents a library member in the Library Management System.
+type Member {
+
+    # Unique identifier.
+    id: ID!
+
+    # Member's first name.
+    firstName: String!
+
+    # Member's last name.
+    lastName: String!
+
+    # Member's email address.
+    email: String!
+
+    # Date the member joined the library.
+    membershipDate: String!
+
+    # Indicates whether the membership is currently active.
+    active: Boolean!
+}
+
+# Input object used to create or update a library member.
+#
+# Unlike the Member type, this object contains only the fields
+# that clients are allowed to provide.
+input MemberInput {
+
+    # Member's first name.
+    firstName: String!
+
+    # Member's last name.
+    lastName: String!
+
+    # Member's email address.
+    email: String!
+}

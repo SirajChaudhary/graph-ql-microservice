@@ -1,0 +1,89 @@
+# =============================================================================
+# Publisher GraphQL Schema
+# =============================================================================
+#
+# This schema defines the GraphQL API, including queries, mutations,
+# object types, and input objects for managing publishers in the
+# Library Management System.
+#
+# A GraphQL schema acts as the contract between the client and the server.
+# It defines:
+#
+# • Queries       - Read or fetch data.
+# • Mutations     - Create, update, and delete data.
+# • Object Types  - Objects returned to the client.
+# • Input Objects - Objects accepted from the client.
+#
+# Queries
+# • Fetch a single publisher by ID.
+# • Fetch all publishers.
+#
+# Mutations
+# • Create a new publisher.
+# • Update an existing publisher.
+# • Delete an existing publisher.
+#
+# GraphQL Symbols
+# • !  -> Indicates a mandatory (non-null) field or argument.
+# • [] -> Indicates a list (collection) of objects.
+#
+# Examples
+# • ID!            -> Mandatory ID
+# • String!        -> Mandatory String
+# • String         -> Optional String
+# • [Publisher!]!  -> Mandatory list containing non-null Publisher objects.
+# =============================================================================
+
+extend type Query {
+
+    # Fetch a single publisher by its unique ID.
+    publisher(id: ID!): Publisher
+
+    # Fetch all publishers.
+    publishers: [Publisher!]!
+}
+
+extend type Mutation {
+
+    # Create a new publisher.
+    createPublisher(input: PublisherInput!): Publisher
+
+    # Update an existing publisher.
+    updatePublisher(id: ID!, input: PublisherInput!): Publisher
+
+    # Delete an existing publisher by its unique ID.
+    # Returns true if the publisher is deleted successfully.
+    deletePublisher(id: ID!): Boolean
+}
+
+# Represents a publisher in the Library Management System.
+type Publisher {
+
+    # Unique identifier.
+    id: ID!
+
+    # Publisher name.
+    name: String!
+
+    # Publisher's email address (optional).
+    email: String
+
+    # Publisher's website URL (optional).
+    website: String
+}
+
+# Input object used to create or update a publisher.
+#
+# Unlike the Publisher type, this object contains only the fields
+# that clients are allowed to provide.
+input PublisherInput {
+
+    # Publisher name.
+    name: String!
+
+    # Publisher's email address (optional).
+    email: String
+
+    # Publisher's website URL (optional).
+    website: String
+}

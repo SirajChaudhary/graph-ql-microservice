@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: library-management-service
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/librarydb?createDatabaseIfNotExist=true&serverTimezone=UTC
+    username: root
+    password: mysql123
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+
+  graphql:
+    # Enables the GraphiQL web interface for testing GraphQL queries and mutations.
+    # Access GraphiQL at: http://localhost:8080/graphiql
+    graphiql:
+      enabled: true
+
+logging:
+  level:
+    org.springframework.graphql: INFO
+    org.hibernate.SQL: DEBUG
