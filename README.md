@@ -1,6 +1,6 @@
-# Library Management System
+# Library Management Service
 
-A **Library Management System** built using **Java 21**, **Spring GraphQL**, **Spring Boot**, **Spring Data JPA**, and **MySQL**.
+A **Library Management Service** built using **Java 21**, **Spring GraphQL**, **Spring Boot**, **Spring Data JPA**, and **MySQL**.
 
 This project demonstrates how to build GraphQL APIs using Spring Boot while implementing a layered architecture, GraphQL queries, mutations, field resolvers, dynamic filtering, pagination, sorting, caching, validation, transaction management, JPA relationships, and other software development best practices.
 
